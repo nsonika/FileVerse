@@ -2,8 +2,6 @@
 import { useState, useEffect } from "react";
 import UploadedFilesList from "../../components/UploadedFilesList";
 
-
-
 export default function Files() {
     const [uploadedFiles, setUploadedFiles] = useState([]);
 
@@ -15,8 +13,8 @@ export default function Files() {
                 if (!response.ok) {
                     throw new Error("Failed to fetch files from the server.");
                 }
-                const { files } = await response.json(); // Assuming the API returns { files: [] }
-                setUploadedFiles(files.map(formatFileData)); // Format data if necessary
+                const { files } = await response.json();
+                setUploadedFiles(files.map(formatFileData));
             } catch (error) {
                 console.error("Error fetching files:", error);
                 alert("Failed to fetch files. Please try again later.");
@@ -34,14 +32,10 @@ export default function Files() {
         url: file.file_url,
     });
 
-    const previewFile = (url) => {
-        alert(`Previewing file from URL: ${url}`);
-    };
-
     return (
         <div className="p-6">
             <h1 className="text-2xl font-bold mb-4">File Management</h1>
-            <UploadedFilesList files={uploadedFiles} onPreview={previewFile} />
+            <UploadedFilesList files={uploadedFiles} />
         </div>
     );
 }

@@ -1,4 +1,32 @@
-export default function UploadedFilesList({ files, onPreview }) {
+"use client";
+
+export default function UploadedFilesList({ files }) {
+    const downloadFile = async (url, fileName) => {
+        try {
+            const response = await fetch(url);
+
+            if (!response.ok) {
+                throw new Error("Failed to fetch the file for download.");
+            }
+
+            // Convert the response into a Blob
+            const blob = await response.blob();
+
+            // Create a temporary download link
+            const link = document.createElement("a");
+            link.href = window.URL.createObjectURL(blob);
+            link.download = fileName;
+            document.body.appendChild(link);
+            link.click();
+
+            // Clean up the temporary link
+            document.body.removeChild(link);
+        } catch (error) {
+            console.error("Error downloading file:", error);
+            alert("Failed to download the file. Please try again.");
+        }
+    };
+
     return (
         <div className="mt-6">
             <h2 className="text-lg font-bold mb-4">Uploaded Files</h2>
@@ -13,19 +41,21 @@ export default function UploadedFilesList({ files, onPreview }) {
                             Size: {(file.size / 1024).toFixed(2)} KB
                         </p>
                         <div className="flex justify-between">
+                            {/* Open the file in a new tab */}
                             <button
-                                onClick={() => onPreview(file.url)}
+                                onClick={() => window.open(file.url, "_blank")}
                                 className="text-blue-500 hover:underline"
                             >
                                 Preview
                             </button>
-                            <a
-                                href={file.url}
-                                download={file.name}
+
+                            {/* Force download the file */}
+                            <button
+                                onClick={() => downloadFile(file.url, file.name)}
                                 className="text-green-500 hover:underline"
                             >
                                 Download
-                            </a>
+                            </button>
                         </div>
                     </div>
                 ))}
