@@ -33,7 +33,7 @@ export default function Files() {
     });
 
     return (
-        <div className="p-6">
+        <div className="p-6 bg-gray-100 dark:text-black min-h-screen ">
             <h1 className="text-2xl font-bold mb-4">File Management</h1>
             <UploadedFilesList files={uploadedFiles} />
         </div>

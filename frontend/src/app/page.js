@@ -126,32 +126,36 @@ export default function Home() {
   };
 
   return (
-    <div>
-      <div className="p-6">
-        <h1 className="text-2xl font-bold mb-4">Upload Files</h1>
-        <DropZone
-          onFileSelect={(newFiles) => setFiles([...files, ...newFiles])}
-        />
-        <FileUploader
-          files={files}
-          uploading={uploading}
-          onRemoveFile={removeFile}
-        />
-        <button
-          onClick={handleUpload}
-          disabled={!files.length}
-          className={`mt-4 px-4 py-2 bg-blue-500 text-white rounded ${
-            !files.length && "opacity-50 cursor-not-allowed"
-          }`}
-        >
-          Start Upload
-        </button>
-        <button
-          onClick={goToFiles}
-          className="mt-4 ml-4 px-4 py-2 bg-green-500 text-white rounded"
-        >
-          Go to File Management
-        </button>
+    <div className="min-h-screen bg-gray-100">
+      <div className="w-full max-w-2xl mx-auto">
+        <div className="p-6">
+          <h1 className="text-2xl font-bold mb-4 text-center">Upload Files</h1>
+          <DropZone
+            onFileSelect={(newFiles) => setFiles([...files, ...newFiles])}
+          />
+          <FileUploader
+            files={files}
+            uploading={uploading}
+            onRemoveFile={removeFile}
+          />
+          <div className="flex justify-between mt-4">
+            <button
+              onClick={handleUpload}
+              disabled={!files.length}
+              className={`px-4 py-2 rounded border text-white bg-black ${
+                !files.length && "opacity-50 cursor-not-allowed"
+              }`}
+            >
+              Start Upload
+            </button>
+            <button
+              onClick={goToFiles}
+              className="px-4 py-2 rounded border border-black bg-white text-black"
+            >
+              Go to File Management
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   );
