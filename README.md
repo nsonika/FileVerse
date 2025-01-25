@@ -109,3 +109,13 @@ This project uses Cypress for automated end-to-end testing.
 - **frontend/**: Contains the Next.js-based UI for file management.
 - **backend/**: Contains API logic for file uploads and interactions with Appwrite.
 - **frontend/cypress/**: E2E testing suite for frontend validation.
+
+## Approach
+
+I chose **FastAPI** with **Appwrite Cloud** for its easy integration and free usage, using Appwrite specifically for the preview feature. File uploads were implemented in three steps using FastAPI for simplicity and efficiency: 
+
+1. **Start Upload**: Initialize a session and metadata storage.
+2. **Chunk Upload**: Handle large files by splitting them into smaller chunks for smoother uploads.
+3. **Complete Upload**: Combine chunks, upload to Appwrite, and store metadata.
+
+To ensure reliability, Testing was handled with Cypress, covering upload, preview, and download to make sure everything works as expected.Docker was used for deployment, providing a consistent environment across different setups.
