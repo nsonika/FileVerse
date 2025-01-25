@@ -42,12 +42,15 @@ export default function UploadedFilesList({ files }) {
                         </p>
                         <div className="flex justify-between">
                             {/* Open the file in a new tab */}
-                            <button
-                                onClick={() => window.open(file.url, "_blank")}
+                            <a
+                                href={file.url}
+                                target="_blank"
+                                rel="noopener noreferrer"
                                 className="text-blue-500 hover:underline"
                             >
                                 Preview
-                            </button>
+                            </a>
+
 
                             {/* Force download the file */}
                             <button
